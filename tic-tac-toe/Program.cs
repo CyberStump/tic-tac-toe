@@ -4,14 +4,13 @@ namespace tic_tac_toe
 {
     class Program : API
     {
-        readonly static string Title = "Tic-Tac-Toe 1.0(beta)";
-        public static Grid GameGrid;
+        readonly static string Title = "Tic-Tac-Toe";
         public static ConsoleColor DefaultBackColor { get; private set; } = ConsoleColor.Gray;
         public static ConsoleColor DefaultTextColor { get; private set; } = ConsoleColor.Black;
+        public static Grid GameGrid;
 
-        // The move of a cross(X) or a zero(O).
+        // The move of a cross or a zero.
         private static char MoveSign; 
-
 
         static void Main(string[] args)
         {
@@ -29,10 +28,10 @@ namespace tic_tac_toe
 
         public static void Game()
         {
-            int moves = 0;      // Number of moves taken.
+            int moves    = 0;      // Number of moves till win.
+            int textPosX = 5,
+                textPosY = 1;
             char winner = 'N';
-            int textStartPosX = 5,
-                textSrartPosY = 2;
                       
             MoveSign = RandomGen.Next(0, 2) == 0 ? 'X' : 'O';
             GameGrid.DrawGrid();
@@ -40,8 +39,8 @@ namespace tic_tac_toe
             {
                 MoveSign = MoveSign == 'X' ? 'O' : 'X';                
 
-                WriteAt("Ход: " + MoveSign.ToString(), textStartPosX, textSrartPosY);
-                WriteAt("Количество ходов: " + moves.ToString(), textStartPosX, textSrartPosY+2);
+                WriteAt("Ход: " + MoveSign.ToString(), textPosX, textPosY);
+                WriteAt("Количество ходов: " + moves.ToString(), textPosX, textPosY+2);
                 GameGrid.Move(MoveSign);
 
                 moves++;
@@ -51,16 +50,11 @@ namespace tic_tac_toe
 
             BackColor(ConsoleColor.DarkRed);
             TextColor(ConsoleColor.White);
-
-            WriteAt(" Победитель: " + winner.ToString() + "    Для продолжения 2 раза нажмите Enter", textStartPosX, textSrartPosY);
-            Console.ReadLine();
-            WriteAt(" Победитель: " + winner.ToString() + "    Для продолжения 1 раз нажмите Enter ", textStartPosX, textSrartPosY);
-            Console.ReadLine();
-
-
+            WriteAt(" Победитель: " + winner.ToString() + " ", textPosX, textPosY);
             BackColor(DefaultBackColor);
             TextColor(DefaultTextColor);
 
+            Console.ReadLine();
             GameGrid.ResetGrid();
             ClearScreen(true);
         }
