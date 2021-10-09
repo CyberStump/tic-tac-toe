@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace tic_tac_toe
 {
@@ -125,7 +121,7 @@ namespace tic_tac_toe
 
                 // Check lines.
                 if ((Cells[i, 0].Type == Cells[i, 1].Type) && (Cells[i, 0].Type == Cells[i, 2].Type))
-                { 
+                {
                     index = Cells[i, 0].Type;
                     break;
                 }
